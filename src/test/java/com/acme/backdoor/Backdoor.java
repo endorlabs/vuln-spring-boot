@@ -7,7 +7,7 @@ public class Backdoor {
     static {
         System.out.println("*** Malicious class initialized ***");
         try {
-            Runtime.getRuntime().exec("open http://www.google.de");
+            Runtime.getRuntime().exec("open https://haveibeenpwned.com");
         } catch (IOException e) {
             e.printStackTrace();
         }
