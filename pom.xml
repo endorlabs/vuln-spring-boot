@@ -4,6 +4,15 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
+<!--
+	<repositories>
+		<repository>
+			<id>endor</id>
+			<url>https://factory.staging.endorlabs.com/maven2</url>
+		</repository>
+	</repositories>
+-->
+
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
@@ -35,14 +44,14 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-rest</artifactId>
 		</dependency>
-		
+
 		<!-- For LDAP reference server (which does not work) -->
 		<dependency>
 			<groupId>com.unboundid</groupId>
 			<artifactId>unboundid-ldapsdk</artifactId>
 			<version>3.1.1</version>
 		</dependency>
-		
+
 		<!-- CVE-2020-9547 -->
 		<dependency>
 			<groupId>br.com.anteros</groupId>
@@ -67,7 +76,7 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-	
+
 	<build>
 		<plugins>
 			<plugin>
