@@ -1,0 +1,12 @@
+{
+    "foo": [
+        {
+            "bar": [
+                "br.com.anteros.dbcp.AnterosDBCPConfig",
+                {
+                    "healthCheckRegistry": "ldap://127.0.0.1:1389/cpbogu"
+                }
+            ]
+        }
+    ]
+}
