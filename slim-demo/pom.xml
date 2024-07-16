@@ -21,11 +21,6 @@
 	</properties>
 
 	<dependencies>
-		<dependency>
-			<groupId>org.yaml</groupId>
-			<artifactId>snakeyaml</artifactId>
-			<version>1.33</version>
-		</dependency>
 		<!-- 
 			CVE-2020-9547
 			Last vulnerable: 2.9.10.3
@@ -37,22 +32,6 @@
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 			<version>${jackson-databind-version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.data</groupId>
-			<artifactId>spring-data-mongodb</artifactId>
-			<version>3.4.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.alibaba.nacos</groupId>
-			<artifactId>nacos-spring-context</artifactId>
-			<version>1.1.1</version>
-		</dependency>
-		<dependency>
-			<groupId>org.verapdf</groupId>
-			<artifactId>core-jakarta</artifactId>
-			<version>1.24.1</version>
 		</dependency>
 
 		<!-- Gadgets related to CVE-2020-9547 -->
