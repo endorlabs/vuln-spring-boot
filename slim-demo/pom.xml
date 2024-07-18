@@ -13,7 +13,7 @@
 	<description></description>
 
 	<properties>
-		<jackson-databind-version>2.9.10.3</jackson-databind-version>
+		<library-version>2.9.10.3</library-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
@@ -31,7 +31,7 @@
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
-			<version>${jackson-databind-version}</version>
+			<version>${library-version}</version>
 		</dependency>
 
 		<!-- Gadgets related to CVE-2020-9547 -->
