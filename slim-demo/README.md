@@ -56,14 +56,53 @@ Goals:
 
 ## Build the image
 
-Prerequisites:
-- `Dockerfile` and `run.sh` adapted to the specific vulnerability
-- Vulnerable and patched library versions in folder `lib`
+
+Directory structure of tarball:
+```
+.
+├── Dockerfile
+├── run.sh
+├── pom.xml
+├── lib/
+│   ├── <artifact>-<vul_version>.jar
+│   └── <artifact>-<vul_version>-endor-<yyyymmdd>.jar
+└── src/
+    ├── main/
+    │   └── java/
+    │       └── ...
+    └── test/
+        └── payload.txt (if any)
+```
+
+Directory structure of Docker image:
+
+```
+.
+├── workspace/ (used to compile the classes)
+│   ├── pom.xml
+│   ├── src
+│   │   └── ...
+│   ├── target
+│   │   └── ...
+│   ├── deps/ (contains all deps except the vulnerable artifact)
+│   └── lib
+│       ├── <artifact>-<vul_version>.jar
+│       └── <artifact>-<vul_version>-endor-<yyyymmdd>.jar
+└── app (used to run the app)
+    ├── run.sh
+    ├── classes/ (compiled classes fro workspace/target/classes)
+    ├── deps/
+    └── lib/
+```
+
+Adapt to new vulns:
+- Change `Dockerfile` and `run.sh` for the specific vulnerability
+- Put vulnerable and patched library versions in folder `lib`
 
 Build the Docker image once per CVE and library version:
 - Choose the right `--platform`
-- Specify the vulnerable library version
-- Create an appropriate tag
+- Specify the artifact and vulnerable library version with build args `ARTIFACT_ID` and `VULNERABLE_VERSION`
+- Create an appropriate `--tag`
 
 Example:
 ```
