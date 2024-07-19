@@ -35,12 +35,13 @@ Explanation: The [patch](https://github.com/FasterXML/jackson-databind/commit/03
 ## Patched version (from Endor)
 
 ```
-<TODO>
+mvn -q -Dlibrary-version=2.9.10.3-endor-latest clean package
+java -jar target/poc-0.0.1-SNAPSHOT-shaded.jar src/test/AnterosDBCPConfig.json
 ```
 
+TODO: Configure pom.xml
+
 The patched version raises the same exception as the original fix.
-
-
 
 # Exploit and patch validation in workflow 
 
@@ -57,7 +58,7 @@ Goals:
 ## Build the image
 
 
-Directory structure of tarball:
+Directory structure:
 ```
 .
 ├── Dockerfile
@@ -96,8 +97,10 @@ Directory structure of Docker image:
 ```
 
 Adapt to new vulns:
-- Change `Dockerfile` and `run.sh` for the specific vulnerability
-- Put vulnerable and patched library versions in folder `lib`
+- Develop a vulnerable app in `src/`
+- Adapt functions `start_helper`, `run_exploit` and `validate_exploit_success` in bash script `run.sh`
+- Adapt `Dockerfile` (if necessary)
+- Include vulnerable and patched library versions in folder `lib`
 
 Build the Docker image once per CVE and library version:
 - Choose the right `--platform`
