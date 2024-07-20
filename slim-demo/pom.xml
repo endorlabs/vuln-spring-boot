@@ -16,7 +16,7 @@
 	<repositories>
 	<repository>
 		<id>endorlabs</id>
-		<url>https://factory.staging.endorlabs.com/v1/namespaces/<namespace>/maven2</url>
+		<url>https://factory.endorlabs.com/v1/namespaces/<namespace>/maven2</url>
 	</repository>
 	</repositories>
 	-->
