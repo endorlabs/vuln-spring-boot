@@ -33,7 +33,7 @@ Prior to the demo go to the pom.xml file at slim-demo/pom.xml and update the <na
 	<repositories>
 	<repository>
 		<id>endorlabs</id>
-		<url>https://factory.staging.endorlabs.com/v1/namespaces/<namespace>/maven2</url>
+		<url>https://factory.endorlabs.com/v1/namespaces/<namespace>/maven2</url>
 	</repository>
 	</repositories>
 -->
