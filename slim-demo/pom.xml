@@ -40,7 +40,7 @@
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
-			<version>${library-version}</version>
+			<version>2.10.0</version>
 		</dependency>
 
 		<!-- Gadgets related to CVE-2020-9547 -->
