@@ -1,11 +1,48 @@
 
-
 # Demo
+
+## Pre-requisites
+
+- Have Java and Maven installed
+- Configure a settings.xml file with an API key and secret as the user and password.
+
+Your settings.xml file should look like this: 
+
+Please make sure to replace the username with your Endor Labs API key and the password with your Endor Labs API Key Secret.
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+                              http://maven.apache.org/xsd/settings-1.0.0.xsd">
+    <servers>
+        <server>
+            <id>endorlabs</id>
+            <username>endr+XXXXXXX</username>
+            <password>endr+XXXXXXX</password>
+        </server>
+    </servers>
+</settings>
+```
+
+Prior to the demo go to the pom.xml file at slim-demo/pom.xml and update the <namespace> to be the namespace you used for your API key. The section should look like this:
+
+```xml
+ <!--
+	<repositories>
+	<repository>
+		<id>endorlabs</id>
+		<url>https://factory.endorlabs.com/v1/namespaces/<namespace>/maven2</url>
+	</repository>
+	</repositories>
+-->
+```
 
 ## Vulnerable version
 
 ```
-mvn -q -Dlibrary-version=2.9.10.3 clean package
+mvn -Dlibrary-version=2.9.10.3 clean package
 java -jar target/poc-0.0.1-SNAPSHOT-shaded.jar src/test/AnterosDBCPConfig.json
 ```
 
@@ -16,7 +53,7 @@ PS: The exception printed afterwards is due to a class cast exception that happe
 ## Compile exception
 
 ```
-mvn -q -Dlibrary-version=2.10.0 clean package
+mvn -Dlibrary-version=2.10.0 clean package
 ```
 
 Explanation:
@@ -25,22 +62,14 @@ Explanation:
 
 ## Patched version (from project)
 
-```
-mvn -q -Dlibrary-version=2.9.10.4 clean package
+First remove the text file created and then run the same command with the Endor Labs patch:
+
+```bash
+mvn -Dlibrary-version=2.9.10.3-endor-latest clean package
 java -jar target/poc-0.0.1-SNAPSHOT-shaded.jar src/test/AnterosDBCPConfig.json
 ```
 
 Explanation: The [patch](https://github.com/FasterXML/jackson-databind/commit/03f30bf11c9315c3acd4ec8db97a2f22dbbc2f94) extends the deny-list with known gadget types such as class `AnterosDBCPConfig`. This deny-list is checked before deserialization, and throws an exception with message `Illegal type (br.com.anteros.dbcp.AnterosDBCPConfig) to deserialize: prevented for security reasons`.
-
-## Patched version (from Endor)
-
-```
-<TODO>
-```
-
-The patched version raises the same exception as the original fix.
-
-
 
 # Exploit and patch validation in workflow 
 
