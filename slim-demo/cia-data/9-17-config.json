@@ -1,7 +1,7 @@
 {
     "clientCallGraph": "",
     "clientPkgVersion": "",
-    "oldDependencyCallGraph": "/Users/henrikplate/Documents/Work/github.com/endorlabs/monorepo/cg-jackson-2.9.10.3.json",
-    "newDependencyCallGraph": "/Users/henrikplate/Documents/Work/github.com/endorlabs/monorepo/cg-jackson-2.17.2.json",
+    "oldDependencyCallGraph": "./cg-jackson-2.9.10.3.json",
+    "newDependencyCallGraph": "./cg-jackson-2.17.2.json",
     "dependencyCallGraphs": []
 }
