@@ -24,14 +24,12 @@ public class DeserialPoC {
         ObjectMapper mapper = new ObjectMapper();
         mapper.enableDefaultTyping();
         try {
-            TypeReference ref_obj = new TypeReference<HashMap<String, ArrayList<Object>>>() {
-            };
-            // Map<String, List<Foo>> foo_obj = mapper.readValue(new File(args[0]),
-            // ref_obj);
-            Map<String, List<Object>> foo_obj = mapper.readValue(new File(args[0]), ref_obj);
+            mapper.readValue(new File(args[0]), Object.class);
         } catch (IOException e) {
             System.err.println(e.getClass().getSimpleName() + " when deserializing: " + e.getMessage());
         }
         ldap_server.shutdown();
+
+        new com.fasterxml.jackson.databind.jsontype.impl.ClassNameIdResolver(null, null);
     }
 }

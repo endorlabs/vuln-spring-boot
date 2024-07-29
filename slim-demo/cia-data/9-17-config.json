@@ -1,0 +1,7 @@
+{
+    "clientCallGraph": "",
+    "clientPkgVersion": "",
+    "oldDependencyCallGraph": "./cg-jackson-2.9.10.3.json",
+    "newDependencyCallGraph": "./cg-jackson-2.17.2.json",
+    "dependencyCallGraphs": []
+}

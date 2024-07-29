@@ -57,8 +57,18 @@ mvn -Dlibrary-version=2.10.0 clean package
 ```
 
 Explanation:
-- Java generics are handled differently by version 2.10.0, which can lead to compile exceptions according to the [2.10.0 release notes](https://github.com/FasterXML/jackson/wiki/Jackson-Release-2.10#databind-typereference-assignment-compatibility-for-readvalue): "[...] you CAN NOT use subtype of a type variable, so this DOES NOT compile. [...] One thing to note is that this change IS binary-compatible (so anything compiled against 2.9 will still link fine against 2.10), but NOT source-compatible. This means that change should not cause any issues with transitive dependencies; but will cause compilation failure."
-- Developers using generics in such way cannot easily update to non-vulnerable versions.
+- The visibility of the public constructor `ClassNameIdResolver(JavaType, TypeFactory)` was changed to `protected` as of version [2.10.0](https://github.com/FasterXML/jackson-databind/blob/a1eedfdeea46f2a8da0ed23f06e7e1d39050499b/src/main/java/com/fasterxml/jackson/databind/jsontype/impl/ClassNameIdResolver.java), which leads to a compile exception.
+- There's no single commit changing the visibility from `public` to `protected`. Instead, they first deleted the constructor with [c456a08a2adccad646040d5ad5c7d4558c28745e](https://github.com/FasterXML/jackson-databind/commit/c456a08a2adccad646040d5ad5c7d4558c28745e#diff-5e05c51585370aaf3b9b7fc8489ee4feafc3e56c846b3f5f0fbef5570fa6769b), and re-introduced it with [e2859a691e1c30d7454df7a6ddb140ceffc6c78c](https://github.com/FasterXML/jackson-databind/commit/e2859a691e1c30d7454df7a6ddb140ceffc6c78c#diff-5e05c51585370aaf3b9b7fc8489ee4feafc3e56c846b3f5f0fbef5570fa6769b), having protected visibility.
+- BC candidates between 2.9.10.3 and 2.10.0 can be found by running the following command (whereby the config file needs to point to the respective library CGs):
+```
+bazel run //src/golang/internal.endor.ai/pkg/x/peekimpact:peekimpact -- --config config.json --debug=1 --reach=false --json-summary=9-10-diff.json
+```
+- The BC in question looks as follows:
+```
+{
+  "functionChanges": [
+    {"defined":true,"diffChange":"Changed","functionRef":"java://com.fasterxml.jackson.core:jackson-databind$2.9.10.3/com.fasterxml.jackson.databind.jsontype.impl/ClassNameIdResolver.\u003cinit\u003e(/com.fasterxml.jackson.databind/JavaType,/com.fasterxml.jackson.databind.type/TypeFactory)/java.lang/VoidType","modifierChange":"Public to protected"},
+```
 
 ## Patched version (from project)
 
