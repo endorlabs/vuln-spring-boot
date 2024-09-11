@@ -38,7 +38,7 @@ public class MainController extends SpringBootServletInitializer {
         }*/
 
         CreatorCollector coll = new CreatorCollector(null, null);
-        coll.addDelegatingCreator(null, true, null, 0);
+        coll.addDelegatingCreator(null, true, null, 0, 0);
 
 	}   
 	
