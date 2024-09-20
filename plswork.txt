@@ -1,0 +1,50 @@
+{
+  "list": {
+    "objects": [
+      {
+        "meta": {
+          "create_time": "2024-02-28T00:25:58.875Z",
+          "kind": "EndorLicense",
+          "name": "Endor License for tenant: product",
+          "parent_kind": "Tenant",
+          "parent_uuid": "6532e1eb8933529ff7dfbda9"
+        },
+        "spec": {
+          "target_namespace": "product",
+          "type": "ENDOR_LICENSE_TYPE_POV"
+        },
+        "tenant_meta": {
+          "namespace": "system"
+        },
+        "uuid": "65de7d966399961da00e3cfd"
+      }
+    ],
+    "response": {}
+  }
+}
+
+{
+  "list": {
+    "objects": [
+      {
+        "meta": {
+          "create_time": "2024-02-28T00:25:58.875Z",
+          "kind": "EndorLicense",
+          "name": "Endor License for tenant: product",
+          "parent_kind": "Tenant",
+          "parent_uuid": "6532e1eb8933529ff7dfbda9"
+        },
+        "spec": {
+          "target_namespace": "product",
+          "type": "ENDOR_LICENSE_TYPE_POV"
+        },
+        "tenant_meta": {
+          "namespace": "system"
+        },
+        "uuid": "65de7d966399961da00e3cfd"
+      }
+    ],
+    "response": {}
+  }
+}
+
